@@ -94,8 +94,8 @@ local scrlocker    = "slock"
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5", "6" }
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
+    awful.layout.suit.floating,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
@@ -512,7 +512,7 @@ globalkeys = my_table.join(
               {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
-    awful.key({ modkey }, "b", function () awful.spawn(browser) end,
+    awful.key({ modkey }, "q", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
     awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
               {description = "run gui editor", group = "launcher"}),
@@ -770,4 +770,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- https://github.com/lcpz/awesome-copycats/issues/251
 -- }}}
 
+awful.spawn.with_shell("picom --config  $HOME/.config/picom/picom.conf")
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")

@@ -7,4 +7,5 @@ function run {
   fi
 }
 
-run nitrogen ["--restore &"]
+run nitrogen	["--restore &"]
+# run picom 	["-b  --config  $HOME/.config/picom/picom.conf"]

@@ -1,10 +1,3 @@
---[[
-
-     Powerarrow Awesome WM theme
-     github.com/lcpz
-
---]]
-
 local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
@@ -17,7 +10,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow"
 --theme.wallpaper                                 = theme.dir .. "/wall.png"
-theme.font                                      = "Terminus 9"
+theme.font                                      = "Terminus 11"
 theme.fg_normal                                 = "#FEFEFE"
 theme.fg_focus                                  = "#32D6FF"
 theme.fg_urgent                                 = "#C83F11"
@@ -342,7 +335,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(16), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(20), bg = theme.bg_normal, fg = theme.fg_normal })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -371,14 +364,14 @@ function theme.at_screen_connect(s)
             pl(binclock.widget, "#777E76"),
             --]]
             -- using separators
---             wibox.container.margin(scissors, dpi(4), dpi(8)),
---             arrow(theme.bg_normal, "#343434"),
+	    arrow(theme.bg_normal, "#343434"),
+	    wibox.container.background(wibox.container.margin(scissors, dpi(4), dpi(8)), "#343434"),
 --             wibox.container.background(wibox.container.margin(wibox.widget { mailicon, theme.mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(7)), "#343434"),
 --             arrow("#343434", theme.bg_normal),
 --             wibox.container.background(wibox.container.margin(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(6)), theme.bg_focus),
-            arrow(theme.bg_normal, "#343434"),
-            wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#343434"),
-            arrow("#343434", "#777E76"),
+            arrow("#343434", "#343440"),
+            wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#343440"),
+            arrow("#343440", "#777E76"),
             wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(2), dpi(3)), "#777E76"),
             arrow("#777E76", "#4B696D"),
             wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(4)), "#4B696D"),
