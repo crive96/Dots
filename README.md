@@ -17,9 +17,11 @@ Applications used:
 * `slock` as display locker
 
 ### Screenshots
-* Powerarrow 02-12-2020:
+* Powerarrow 02-12-2020: <br/>
+
 Wallpaper & spotify
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_02122020_2.png)
+
 Terminal, neofetch, htop, vim
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_02122020.png)
 
