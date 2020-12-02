@@ -51,7 +51,7 @@ local function run_once(cmd_arr)
     end
 end
 
-run_once({ "urxvtd", "unclutter -root" }) -- entries must be separated by commas
+run_once({ "alacritty", "unclutter -root" }) -- entries must be separated by commas
 
 -- This function implements the XDG autostart specification
 --[[
@@ -78,6 +78,7 @@ local themes = {
     "rainbow",         -- 8
     "steamburn",       -- 9
     "vertex",          -- 10
+    "powerarrow-blue", -- 11
 }
 
 local chosen_theme = themes[6]
@@ -434,43 +435,40 @@ globalkeys = my_table.join(
               {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
-   -- awful.key({ altkey }, "Up",
-      awful.key({ }, "XF86AudioRaiseVolume",
+     awful.key({ }, "XF86AudioRaiseVolume",
         function ()
             os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
             beautiful.volume.update()
-        end,
+    	end,
         {description = "volume up", group = "hotkeys"}),
-   -- awful.key({ altkey }, "Down",
-       awful.key({ }, "XF86AudioLowerVolume",
+
+     awful.key({ }, "XF86AudioLowerVolume",
    	function ()
             os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
             beautiful.volume.update()
-        end,
+    	end,
         {description = "volume down", group = "hotkeys"}),
-    awful.key({ altkey }, "m",
-        function ()
-            os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "toggle mute", group = "hotkeys"}),
-    awful.key({ altkey, "Control" }, "m",
+
+     awful.key({ altkey, "Control" }, "m",
         function ()
             os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
+            beautiful.volume.update() 
+   	 end,
         {description = "volume 100%", group = "hotkeys"}),
+
      awful.key({ altkey, "Control" }, "0",
         function ()
             os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
+            beautiful.volume.update() 
+    	end,
         {description = "volume 0%", group = "hotkeys"}),
-	 awful.key({ }, "XF86AudioMute",
+
+     awful.key({ }, "XF86AudioMute",
         function ()
             os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
-            beautiful.volume.update()
-        end),
+            beautiful.volume.update() 
+    	end,
+	{description = "toggle mute", group = "hotkeys"}),
 
 
     -- MPD control
