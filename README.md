@@ -19,8 +19,8 @@ Applications used:
 ### Screenshots
 * Powerarrow 02-12-2020:
 Wallpaper & spotify
-![][https://github.com/crive96/Dots/tree/master/screenshots/powerarrow/manjaro_awesome_02122020_2.png]
+![alt text](https://github.com/crive96/Dots/tree/master/screenshots/powerarrow/manjaro_awesome_02122020_2.png)
 Terminal, neofetch, htop, vim
-![][https://github.com/crive96/Dots/tree/master/screenshots/powerarrow/manjaro_awesome_02122020.png]
+![alt text](https://github.com/crive96/Dots/tree/master/screenshots/powerarrow/manjaro_awesome_02122020.png)
 
 #### Andrea Crivellin
