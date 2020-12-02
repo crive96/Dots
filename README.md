@@ -16,4 +16,11 @@ Applications used:
 * `nitrogen`, to set wallpapers
 * `slock` as display locker
 
-### Andrea Crivellin
+### Screenshots
+* Powerarrow 02-12-2020:
+..* Wallpaper & spotify
+(https://github.com/crive96/Dots/screenshots/powerarrow/manjaro_awesome_02122020_2.png)
+..* Terminal, neofetch, htop, vim
+(https://github.com/crive96/Dots/screenshots/powerarrow/manjaro_awesome_02122020.png)
+
+#### Andrea Crivellin
