@@ -6,14 +6,14 @@ Credits to [DistroTube](https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg
 Current theme: **powerarrow**
 
 Applications used:
-⋅⋅* `firefox` as default browser
-⋅⋅* `dmenu` as prompt
-⋅⋅* `alacritty` as terminal emulator
-⋅⋅* `picom` as compositor
-⋅⋅* `unclutter`, to let cursor disappear
-⋅⋅* `xsel`, copy (and paste) tool
-⋅⋅* `gvim` as editor (uses vim in terminal)
-⋅⋅* `nitrogen`, to set wallpapers
-⋅⋅* `slock` as display locker
+* `firefox` as default browser
+* `dmenu` as prompt
+* `alacritty` as terminal emulator
+* `picom` as compositor
+* `unclutter`, to let cursor disappear
+* `xsel`, copy (and paste) tool
+* `gvim` as editor (uses vim in terminal)
+* `nitrogen`, to set wallpapers
+* `slock` as display locker
 
 ### Andrea Crivellin
