@@ -5,7 +5,8 @@ Credits to [DistroTube](https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg
 
 Current theme: **powerarrow**
 
-Applications used:
+### Applications used:
+
 * `firefox` as default browser
 * `dmenu` as prompt
 * `alacritty` as terminal emulator
@@ -16,4 +17,16 @@ Applications used:
 * `nitrogen`, to set wallpapers
 * `slock` as display locker
 
-### Andrea Crivellin
+### Screenshots
+
+**Powerarrow 02-12-2020:** <br/>
+
+* Wallpaper & spotify
+
+![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_02122020_2.png)
+
+* Terminal, neofetch, htop, vim
+
+![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_02122020.png)
+
+#### Andrea Crivellin
