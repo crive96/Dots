@@ -149,10 +149,29 @@ theme.mail = lain.widget.imap({
 --]]
 
 -- ALSA volume
-theme.volume = lain.widget.alsabar({
+--local volicon = wibox.widget.imagebox(theme.widget_vol)
+--theme.volume = lain.widget.alsabar({
     --togglechannel = "IEC958,3",
-    notification_preset = { font = "Terminus 10", fg = theme.fg_normal },
+--   notification_preset = { font = "Terminus 10", fg = theme.fg_normal },
+--})
+
+local volicon = wibox.widget.imagebox(theme.widget_vol)
+theme.volume = lain.widget.alsa({
+    settings = function()
+        if volume_now.status == "off" then
+            volicon:set_image(theme.widget_vol_mute)
+        elseif tonumber(volume_now.level) == 0 then
+            volicon:set_image(theme.widget_vol_no)
+        elseif tonumber(volume_now.level) <= 50 then
+            volicon:set_image(theme.widget_vol_low)
+        else
+            volicon:set_image(theme.widget_vol)
+        end
+
+        widget:set_markup(markup.font(theme.font, " " .. volume_now.level .. "% "))
+    end
 })
+
 
 -- MPD
 local musicplr = awful.util.terminal .. " -title Music -g 130x34-320+16 -e ncmpcpp"
@@ -270,8 +289,8 @@ local net = lain.widget.net({
 -- Brigtness
 local brighticon = wibox.widget.imagebox(theme.widget_brightness)
 -- If you use xbacklight, comment the line with "light -G" and uncomment the line bellow
--- local brightwidget = awful.widget.watch('xbacklight -get', 0.1,
-local brightwidget = awful.widget.watch('light -G', 0.1,
+local brightwidget = awful.widget.watch('xbacklight -get', 0.1,
+--local brightwidget = awful.widget.watch('light -G', 0.1,
     function(widget, stdout, stderr, exitreason, exitcode)
         local brightness_level = tonumber(string.format("%.0f", stdout))
         widget:set_markup(markup.font(theme.font, " " .. brightness_level .. "%"))
@@ -370,8 +389,8 @@ function theme.at_screen_connect(s)
 --             arrow("#343434", theme.bg_normal),
 --             wibox.container.background(wibox.container.margin(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(6)), theme.bg_focus),
             arrow("#343434", "#343440"),
-            wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#343440"),
-            arrow("#343440", "#777E76"),
+            --wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#343440"),
+	   wibox.container.background(wibox.container.margin(wibox.widget { volicon, theme.volume.widget, layout = wibox.layout.align.horizontal }, dpi(2), dpi(3)), "#343440"),            arrow("#343440", "#777E76"),
             wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(2), dpi(3)), "#777E76"),
             arrow("#777E76", "#4B696D"),
             wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(4)), "#4B696D"),
