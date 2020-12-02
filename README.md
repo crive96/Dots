@@ -19,13 +19,13 @@ Current theme: **powerarrow**
 
 ### Screenshots
 
-* **Powerarrow 02-12-2020:** <br/>
+**Powerarrow 02-12-2020:** <br/>
 
-** Wallpaper & spotify
+* Wallpaper & spotify
 
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_02122020_2.png)
 
-** Terminal, neofetch, htop, vim
+* Terminal, neofetch, htop, vim
 
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_02122020.png)
 
