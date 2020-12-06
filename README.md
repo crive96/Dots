@@ -19,7 +19,7 @@ Current theme: **powerarrow**
 
 ### Screenshots
 
-**Powerarrow 02-12-2020:** <br/>
+**Powerarrow:** <br/>
 
 * Wallpaper & spotify
 
