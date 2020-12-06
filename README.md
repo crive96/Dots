@@ -21,12 +21,12 @@ Current theme: **powerarrow**
 
 **Powerarrow 02-12-2020:** <br/>
 
-* Wallpaper & spotify
+* Wallpaper, terminal
 
-![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_02122020_2.png)
+![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_1.png)
 
-* Terminal, neofetch, htop, vim
+* Neofetch, spotify, vim
 
-![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_02122020.png)
+![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_2.png)
 
 #### Andrea Crivellin
