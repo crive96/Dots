@@ -16,6 +16,8 @@ Current theme: **powerarrow**
 * `gvim` as editor (uses vim in terminal)
 * `nitrogen`, to set wallpapers
 * `slock` as display locker
+* `nm-applet` as network manager
+* `spicetify`, to change spotify theme 
 
 ### Screenshots
 
