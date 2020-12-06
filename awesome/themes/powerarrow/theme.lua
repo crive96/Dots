@@ -3,6 +3,11 @@ local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
+local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+local todo_widget = require("awesome-wm-widgets.todo-widget.todo")
+local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 
 local math, string, os = math, string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -103,7 +108,6 @@ local clock = awful.widget.watch(
     end
 )
 
-
 -- Calendar
 theme.cal = lain.widget.cal({
     --cal = "cal --color=always",
@@ -127,34 +131,7 @@ task:buttons(my_table.join(awful.button({}, 1, lain.widget.contrib.task.prompt))
 local scissors = wibox.widget.imagebox(theme.widget_scissors)
 scissors:buttons(my_table.join(awful.button({}, 1, function() awful.spawn.with_shell("xsel | xsel -i -b") end)))
 
--- Mail IMAP check
---[[ commented because it needs to be set before use
-local mailicon = wibox.widget.imagebox(theme.widget_mail)
-mailicon:buttons(my_table.join(awful.button({ }, 1, function () awful.spawn(mail) end)))
-theme.mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    settings = function()
-        if mailcount > 0 then
-            widget:set_text(" " .. mailcount .. " ")
-            mailicon:set_image(theme.widget_mail_on)
-        else
-            widget:set_text("")
-            mailicon:set_image(theme.widget_mail)
-        end
-    end
-})
---]]
-
--- ALSA volume
---local volicon = wibox.widget.imagebox(theme.widget_vol)
---theme.volume = lain.widget.alsabar({
-    --togglechannel = "IEC958,3",
---   notification_preset = { font = "Terminus 10", fg = theme.fg_normal },
---})
-
+-- Alsa volume
 local volicon = wibox.widget.imagebox(theme.widget_vol)
 theme.volume = lain.widget.alsa({
     settings = function()
@@ -173,39 +150,14 @@ theme.volume = lain.widget.alsa({
 })
 
 
--- MPD
-local musicplr = awful.util.terminal .. " -title Music -g 130x34-320+16 -e ncmpcpp"
-local mpdicon = wibox.widget.imagebox(theme.widget_music)
-mpdicon:buttons(my_table.join(
-    awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
-    awful.button({ }, 1, function ()
-        os.execute("mpc prev")
-        theme.mpd.update()
-    end),
-    awful.button({ }, 2, function ()
-        os.execute("mpc toggle")
-        theme.mpd.update()
-    end),
-    awful.button({ }, 3, function ()
-        os.execute("mpc next")
-        theme.mpd.update()
-    end)))
-theme.mpd = lain.widget.mpd({
-    settings = function()
-        if mpd_now.state == "play" then
-            artist = " " .. mpd_now.artist .. " "
-            title  = mpd_now.title  .. " "
-            mpdicon:set_image(theme.widget_music_on)
-            widget:set_markup(markup.font(theme.font, markup("#FF8466", artist) .. " " .. title))
-        elseif mpd_now.state == "pause" then
-            widget:set_markup(markup.font(theme.font, " mpd paused "))
-            mpdicon:set_image(theme.widget_music_pause)
-        else
-            widget:set_text("")
-            mpdicon:set_image(theme.widget_music)
-        end
-    end
-})
+-- Spotify widget
+local spotify = spotify_widget({font = 'MesloLGS NF 9',
+				play_icon = '/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg',
+				pause_icon = '/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg', 
+				dim_when_paused = true,
+				dim_opacity = 0.5,
+				max_length = -1, 
+				show_tooltip = false})
 
 -- MEM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
@@ -214,6 +166,7 @@ local mem = lain.widget.mem({
         widget:set_markup(markup.font(theme.font, " " .. mem_now.used .. "MB "))
     end
 })
+-- local memwidget = ram_widget()
 
 -- CPU
 local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
@@ -222,17 +175,13 @@ local cpu = lain.widget.cpu({
         widget:set_markup(markup.font(theme.font, " " .. cpu_now.usage .. "% "))
     end
 })
+local cpuwidget = cpu_widget({
+    width = 70,
+    step_width = 2,
+    step_spacing = 0,
+    color = '#434c5e'
+})
 
---[[ Coretemp (lm_sensors, per core)
-local tempwidget = awful.widget.watch({awful.util.shell, '-c', 'sensors | grep Core'}, 30,
-function(widget, stdout)
-    local temps = ""
-    for line in stdout:gmatch("[^\r\n]+") do
-        temps = temps .. line:match("+(%d+).*°C")  .. "° " -- in Celsius
-    end
-    widget:set_markup(markup.font(theme.font, " " .. temps))
-end)
---]]
 -- Coretemp (lain, average)
 local temp = lain.widget.temp({
     settings = function()
@@ -259,9 +208,9 @@ https://openweathermap.org/
 Type in the name of your city
 Copy/paste the city code in the URL to this file in city_id
 --]]
-local weathericon = wibox.widget.imagebox(theme.widget_weather)
+--[[local weathericon = wibox.widget.imagebox(theme.widget_weather)
 theme.weather = lain.widget.weather({
-    city_id = 6534234,
+    city_id = 6534234, -- id city
     notification_preset = { font = "Mononoki Nerd Font 11", fg = theme.fg_normal },
     weather_na_markup = markup.fontfg(theme.font, "#ffffff", "N/A "),
     settings = function()
@@ -269,7 +218,7 @@ theme.weather = lain.widget.weather({
         units = math.floor(weather_now["main"]["temp"])
         widget:set_markup(markup.fontfg(theme.font, "#ffffff", descr .. " @ " .. units .. "°C "))
     end
-})
+})--]]
 
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
@@ -380,50 +329,65 @@ function theme.at_screen_connect(s)
             layout = wibox.layout.fixed.horizontal,
             --spr,
             s.mytaglist,
-            s.mypromptbox,
+	    s.mypromptbox,
             spr,
         },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
+
+	-- Middle widget
+        s.mytasklist,
+	
+	{ -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
+
             --[[ using shapes
-            pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),
-            pl(task, "#343434"),
-            --pl(wibox.widget { mailicon, mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, "#343434"),
+            -- pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),
+            pl(spotify, "#343434"),
+            -- pl(wibox.widget { mailicon, mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, "#343434"),
             pl(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, "#777E76"),
             pl(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, "#4B696D"),
             pl(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, "#4B3B51"),
-            --pl(wibox.widget { fsicon, theme.fs and theme.fs.widget, layout = wibox.layout.align.horizontal }, "#CB755B"),
+            -- pl(wibox.widget { fsicon, theme.fs and theme.fs.widget, layout = wibox.layout.align.horizontal }, "#CB755B"),
             pl(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, "#8DAA9A"),
             pl(wibox.widget { neticon, net.widget, layout = wibox.layout.align.horizontal }, "#C0C0A2"),
-            pl(binclock.widget, "#777E76"),
+            pl(clock, "#777E76"),
             --]]
-            -- using separators
---          arrow(theme.bg_normal, "#343434"),
---          wibox.container.background(wibox.container.margin(scissors, dpi(4), dpi(8)), "#343434"),
---          wibox.container.background(wibox.container.margin(wibox.widget { mailicon, theme.mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(7)), "#343434"),
---          arrow("#343434", theme.bg_normal),
---          wibox.container.background(wibox.container.margin(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(6)), theme.bg_focus),
+            
+	    -- using separators
+	    -- Todo List
+	    todo_widget(), 
+	    -- Volume
             arrow(theme.bg_normal, "#343440"),
---          wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#343440"),
-            wibox.container.background(wibox.container.margin(wibox.widget { volicon, theme.volume.widget, layout = wibox.layout.align.horizontal }, dpi(2), dpi(3)), "#343440"), arrow("#343440", "#777E76"),
-            wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(2), dpi(3)), "#777E76"),
-            arrow("#777E76", "#4B696D"),
-            wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(4)), "#4B696D"),
-            arrow("#4B696D", "#4B3B51"),
-            wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(4)), "#4B3B51"),
-            arrow("#4B3B51", "#CB755B"),
-            wibox.container.background(wibox.container.margin(wibox.widget { weathericon, theme.weather.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#CB755B"),
-            arrow("#CB755B", "#8DAA9A"),
+            wibox.container.background(wibox.container.margin(wibox.widget { volicon, theme.volume.widget, layout = wibox.layout.align.horizontal }, dpi(2), dpi(3)), "#343440"),
+	    -- Ram
+	    arrow("#343440", "#777E76"),
+	    wibox.container.background(wibox.container.margin(ram_widget(), dpi(2), dpi(3)), "#777E76"),
+            -- wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(2), dpi(3)), "#777E76"),
+            -- Cpu
+	    arrow("#777E76", "#4B696D"),
+	    wibox.container.background(wibox.container.margin(cpu_widget(), dpi(3), dpi(4)), "#4B696D"),
+            -- wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(4)), "#4B696D"),            -- Battery
+	    arrow("#4B696D", "#8DAA9A"),
             wibox.container.background(wibox.container.margin(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#8DAA9A"),
-            arrow("#8DAA9A", "#C0C0A2"),
-            wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#C0C0A2"),
-            arrow("#C0C0A2", "#777E76"),
+	    -- Spotify
+	    arrow("#8DAA9A", "#C0C0A2"),
+	    wibox.container.background(wibox.container.margin(spotify, dpi(3), dpi(3)), "#C0C0A2"),
+            -- Weather
+            arrow("#C0C0A2", "#CB755B"),
+	    wibox.container.background(wibox.container.margin(weather_widget({
+						api_key='941a1298a8dce77f489c4d5b1abbcc69',
+           					coordinates = {45.59477, 9.0292467},
+						show_hourly_forecast = true,
+           					show_daily_forecast = true
+					}), dpi(3), dpi(3)), "#CB755B"),
+            --wibox.container.background(wibox.container.margin(wibox.widget { weathericon, theme.weather.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#CB755B"),
+	    -- Clock
+            arrow("#CB755B", "#777E76"),
             wibox.container.background(wibox.container.margin(clock, 4, 8), "#777E76"),
+	    -- Layout
             arrow("#777E76", "alpha"),
-            --]]
             s.mylayoutbox,
+	    --]]
         },
     }
 end

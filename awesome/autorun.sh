@@ -8,5 +8,4 @@ function run {
 }
 
 run nitrogen	["--restore &"]
-# run unclutter	["&"]
-# run picom 	["-b  --config  $HOME/.config/picom/picom.conf"]
+run picom 	["--config  $HOME/.config/picom/picom.conf"]
