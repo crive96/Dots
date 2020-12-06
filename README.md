@@ -16,16 +16,18 @@ Current theme: **powerarrow**
 * `gvim` as editor (uses vim in terminal)
 * `nitrogen`, to set wallpapers
 * `slock` as display locker
+* `nm-applet` as network manager
+* `spicetify`, to change spotify theme 
 
 ### Screenshots
 
 **Powerarrow:** <br/>
 
-* Wallpaper, terminal
+* Wallpaper, vim
 
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_1.png)
 
-* Neofetch, spotify, vim
+* Neofetch, spotify, sl
 
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_2.png)
 
