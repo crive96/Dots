@@ -25,11 +25,11 @@ Current theme: **powerarrow**
 
 **Powerarrow:** <br/>
 
-* Wallpaper, vim
+
 
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_1.png)
 
-* Neofetch, spotify, sl
+
 
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_2.png)
 
