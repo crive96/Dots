@@ -375,7 +375,7 @@ function theme.at_screen_connect(s)
             -- Weather
             arrow("#C0C0A2", "#CB755B"),
 	    wibox.container.background(wibox.container.margin(weather_widget({
-						api_key='941a1298a8dce77f489c4d5b1abbcc69',
+						api_key='<your key>',
            					coordinates = {45.59477, 9.0292467},
 						show_hourly_forecast = true,
            					show_daily_forecast = true
