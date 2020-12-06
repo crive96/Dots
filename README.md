@@ -21,11 +21,11 @@ Current theme: **powerarrow**
 
 **Powerarrow:** <br/>
 
-* Wallpaper, terminal
+* Wallpaper, vim
 
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_1.png)
 
-* Neofetch, spotify, vim
+* Neofetch, spotify, sl
 
 ![wallpaper](../master/screenshots/powerarrow/manjaro_awesome_2.png)
 
